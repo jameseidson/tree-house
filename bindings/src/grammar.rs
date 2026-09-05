@@ -1,9 +1,10 @@
 use std::fmt;
+#[cfg(feature = "libloading")]
 use std::path::{Path, PathBuf};
 use std::ptr::NonNull;
 
+#[cfg(feature = "libloading")]
 use libloading::{Library, Symbol};
-#[cfg(feature = "tree-sitter-language")]
 use tree_sitter_language::LanguageFn;
 
 /// Lowest supported ABI version of a grammar.
@@ -38,6 +39,7 @@ impl Grammar {
     /// # Safety
     ///
     /// `library_path` must be a valid tree sitter grammar
+    #[cfg(feature = "libloading")]
     pub unsafe fn new(name: &str, library_path: &Path) -> Result<Grammar, Error> {
         let library = unsafe {
             Library::new(library_path).map_err(|err| Error::DlOpen {
@@ -77,7 +79,6 @@ impl Grammar {
     }
 }
 
-#[cfg(feature = "tree-sitter-language")]
 impl TryFrom<LanguageFn> for Grammar {
     type Error = Error;
 
@@ -89,12 +90,14 @@ impl TryFrom<LanguageFn> for Grammar {
 
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
+    #[cfg(feature = "libloading")]
     #[error("Error opening dynamic library {path:?}: {err}")]
     DlOpen {
         #[source]
         err: libloading::Error,
         path: PathBuf,
     },
+    #[cfg(feature = "libloading")]
     #[error("Failed to load symbol {symbol}: {err}")]
     DlSym {
         #[source]

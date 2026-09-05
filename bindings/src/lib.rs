@@ -1,3 +1,5 @@
+extern crate tree_sitter as _;
+
 mod grammar;
 mod node;
 mod parser;

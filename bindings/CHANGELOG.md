@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Add `Query::disable_pattern` ([b7b901d81b27](https://github.com/helix-editor/tree-house/commit/b7b901d81b27))
 
+### Changed
+
+* Depend on the official [`tree-sitter`](https://crates.io/crates/tree-sitter) crate to build and link the tree-sitter C library instead of vendoring its sources and compiling them ourselves. This raises the MSRV to 1.90.
+
 ## [v0.3.2] - 2026-06-01
 
 ### Fixed

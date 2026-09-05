@@ -3,10 +3,11 @@ use std::ops::ControlFlow;
 use std::os::raw::c_void;
 use std::panic::{catch_unwind, AssertUnwindSafe};
 use std::ptr::NonNull;
-use std::time::{Duration, Instant};
+use std::time::Duration;
 use std::{fmt, mem, ptr};
 
 use regex_cursor::Cursor;
+use web_time::Instant;
 
 use crate::grammar::IncompatibleGrammarError;
 use crate::tree::{SyntaxTreeData, Tree};

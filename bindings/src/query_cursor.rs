@@ -343,7 +343,11 @@ extern "C" {
     fn ts_query_cursor_set_match_limit(self_: *mut QueryCursorData, limit: u32);
     /// Set the range of bytes or (row, column) positions in which the query
     /// will be executed.
-    fn ts_query_cursor_set_byte_range(self_: *mut QueryCursorData, start_byte: u32, end_byte: u32);
+    fn ts_query_cursor_set_byte_range(
+        self_: *mut QueryCursorData,
+        start_byte: u32,
+        end_byte: u32,
+    ) -> bool;
 
 }
 
